@@ -38,7 +38,7 @@ namespace HotelListing.API.Data
                     CountryId = 1,
                     Rating = 4.5
                 },
-                new Hotel
+                new Hotel 
                 {
                     Id = 2,
                     Name = "Comfort Suites",
