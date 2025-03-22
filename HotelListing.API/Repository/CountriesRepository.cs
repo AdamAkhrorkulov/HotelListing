@@ -20,4 +20,3 @@ namespace HotelListing.API.Repository
         }
     }
 }
-                                    

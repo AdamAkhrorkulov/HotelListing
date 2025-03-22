@@ -4,6 +4,7 @@ using HotelListing.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelListing.API.Migrations
 {
     [DbContext(typeof(HotelListingDbContext))]
-    partial class HotelListingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250312082940_AddedIdentityTables")]
+    partial class AddedIdentityTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,12 +126,6 @@ namespace HotelListing.API.Migrations
                             Id = 2,
                             Name = "Bahamas",
                             ShortName = "BS"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Cayman Island",
-                            ShortName = "CI"
                         });
                 });
 
@@ -171,17 +168,9 @@ namespace HotelListing.API.Migrations
                         {
                             Id = 2,
                             Address = "George Town",
-                            CountryId = 3,
+                            CountryId = 2,
                             Name = "Comfort Suites",
                             Rating = 4.2999999999999998
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "Nassua",
-                            CountryId = 2,
-                            Name = "Grand Palldium",
-                            Rating = 4.0
                         });
                 });
 
@@ -210,20 +199,6 @@ namespace HotelListing.API.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "9e3214a6-8e8c-4226-be9c-9f3113c6fed4",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = "c866717e-91e4-4466-a973-4528601ae54b",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

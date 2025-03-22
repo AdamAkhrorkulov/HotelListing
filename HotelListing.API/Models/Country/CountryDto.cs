@@ -9,4 +9,3 @@ namespace HotelListing.API.Models.Country
         public List<HotelDto> Hotels { get; set; }
     }
 }
- 

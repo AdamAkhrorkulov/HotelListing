@@ -1,52 +1,33 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using HotelListing.API.Data.Configurations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace HotelListing.API.Data
 {
-    public class HotelListingDbContext : DbContext
+    public class HotelListingDbContext : IdentityDbContext<ApiUser>
     {
         public HotelListingDbContext(DbContextOptions options) : base(options)
         {
-            
+
         }
+
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning));
+            base.OnConfiguring(optionsBuilder);
+        }
+
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Country> Countries { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Country>().HasData(
-                new Country
-                {
-                    Id = 1,
-                    Name = "Jamaica",
-                    ShortName = "JM"
-                },
-                new Country
-                {
-                    Id = 2,
-                    Name = "Bahamas",
-                    ShortName = "BS"
-                }
-            );
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            modelBuilder.ApplyConfiguration(new CountryConfiguration());
+            modelBuilder.ApplyConfiguration(new HotelConfiguration());
 
-            modelBuilder.Entity<Hotel>().HasData(
-                new Hotel
-                {
-                    Id = 1,
-                    Name = "Sandals Resort and Spa",
-                    Address = "Negril",
-                    CountryId = 1,
-                    Rating = 4.5
-                },
-                new Hotel 
-                {
-                    Id = 2,
-                    Name = "Comfort Suites",
-                    Address = "George Town",
-                    CountryId = 2,
-                    Rating = 4.3
-                }
-                );
         }
     }
 }

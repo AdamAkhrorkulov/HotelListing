@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using HotelListing.API.Contracts;
+using HotelListing.API.Data;
+using HotelListing.API.Models.Hotel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using HotelListing.API.Data;
-using HotelListing.API.Contracts;
-using HotelListing.API.Repository;
-using AutoMapper;
-using HotelListing.API.Models.Hotel;
 
 namespace HotelListing.API.Controllers
 {
@@ -92,7 +86,7 @@ namespace HotelListing.API.Controllers
             var hotel = _mapper.Map<Hotel>(hotelDto);
             await _hotelsRepository.AddAsync(hotel);
 
-            return CreatedAtAction("GetHotel", new { id = hotel.Id }, hotel);   
+            return CreatedAtAction("GetHotel", new { id = hotel.Id }, hotel);
         }
 
         // DELETE: api/Hotels/5

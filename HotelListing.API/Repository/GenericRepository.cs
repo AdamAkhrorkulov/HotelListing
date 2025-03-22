@@ -1,6 +1,5 @@
 ﻿using HotelListing.API.Contracts;
 using HotelListing.API.Data;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelListing.API.Repository
